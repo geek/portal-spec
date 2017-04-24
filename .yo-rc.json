@@ -6,6 +6,6 @@
     "repo": "geek/portal-spec",
     "splitSpec": false,
     "samples": true,
-    "installSwaggerUI": true
+    "installSwaggerUI": false
   }
 }

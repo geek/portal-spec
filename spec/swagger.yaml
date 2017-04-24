@@ -67,23 +67,20 @@
             }
           }
         ],
-        "consumes": [
-          "multipart/form-data"
-        ],
         "tags": [
           "deployment"
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Model 3",
+              "$ref": "#/definitions/Model 4",
               "type": "object"
             },
             "description": "Successful"
           },
           "201": {
             "schema": {
-              "$ref": "#/definitions/Model 3",
+              "$ref": "#/definitions/Model 4",
               "type": "object"
             },
             "description": "manifest revision created"
@@ -345,16 +342,13 @@
             "required": true
           }
         ],
-        "consumes": [
-          "multipart/form-data"
-        ],
         "tags": [
           "deployment"
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Model 3",
+              "$ref": "#/definitions/Model 4",
               "type": "object"
             },
             "description": "Successful"
@@ -445,19 +439,35 @@
         "id"
       ]
     },
+    "file": {
+      "type": "object"
+    },
     "Model 3": {
       "type": "object",
       "properties": {
         "file": {
-          "type": "string",
-          "description": "JSON file",
-          "x-meta": {
-            "swaggerType": "file"
-          }
+          "$ref": "#/definitions/file",
+          "type": "object"
         }
       },
       "required": [
         "file"
+      ]
+    },
+    "Model 4": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/file",
+          "type": "object"
+        },
+        "revision": {
+          "type": "number",
+          "description": "Revision number of manifest"
+        }
+      },
+      "required": [
+        "revision"
       ]
     },
     "Model 5": {
@@ -491,9 +501,6 @@
         "type": "object"
       }
     },
-    "meta": {
-      "type": "object"
-    },
     "Model 8": {
       "type": "object",
       "properties": {
@@ -507,7 +514,7 @@
           "description": "The type of activity that occurred"
         },
         "meta": {
-          "$ref": "#/definitions/meta",
+          "$ref": "#/definitions/file",
           "type": "object"
         }
       },

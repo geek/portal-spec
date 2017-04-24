@@ -17,7 +17,6 @@
 ## Links
 
 - Documentation(ReDoc): https://geek.github.io/portal-spec/
-- SwaggerUI: https://geek.github.io/portal-spec/swagger-ui/
 - Look full spec:
     + JSON https://geek.github.io/portal-spec/swagger.json
     + YAML https://geek.github.io/portal-spec/swagger.yaml

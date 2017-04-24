@@ -67,9 +67,6 @@
             }
           }
         ],
-        "consumes": [
-          "multipart/form-data"
-        ],
         "tags": [
           "deployment"
         ],
@@ -345,9 +342,6 @@
             "required": true
           }
         ],
-        "consumes": [
-          "multipart/form-data"
-        ],
         "tags": [
           "deployment"
         ],
@@ -445,16 +439,15 @@
         "id"
       ]
     },
+    "file": {
+      "type": "object"
+    },
     "Model 3": {
       "type": "object",
       "properties": {
         "file": {
-          "type": "file",
-          "description": "JSON file",
-          "x-meta": {
-            "swaggerType": "file"
-          },
-          "in": "formData"
+          "$ref": "#/definitions/file",
+          "type": "object"
         }
       },
       "required": [
@@ -465,16 +458,16 @@
       "type": "object",
       "properties": {
         "file": {
-          "type": "file",
-          "description": "JSON file",
-          "x-meta": {
-            "swaggerType": "file"
-          },
-          "in": "formData"
+          "$ref": "#/definitions/file",
+          "type": "object"
+        },
+        "revision": {
+          "type": "number",
+          "description": "Revision number of manifest"
         }
       },
       "required": [
-        "file"
+        "revision"
       ]
     },
     "Model 5": {
@@ -508,9 +501,6 @@
         "type": "object"
       }
     },
-    "meta": {
-      "type": "object"
-    },
     "Model 8": {
       "type": "object",
       "properties": {
@@ -524,7 +514,7 @@
           "description": "The type of activity that occurred"
         },
         "meta": {
-          "$ref": "#/definitions/meta",
+          "$ref": "#/definitions/file",
           "type": "object"
         }
       },
