@@ -76,14 +76,14 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Model 4",
+              "$ref": "#/definitions/Model 3",
               "type": "object"
             },
             "description": "Successful"
           },
           "201": {
             "schema": {
-              "$ref": "#/definitions/Model 4",
+              "$ref": "#/definitions/Model 3",
               "type": "object"
             },
             "description": "manifest revision created"
@@ -354,7 +354,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Model 4",
+              "$ref": "#/definitions/Model 3",
               "type": "object"
             },
             "description": "Successful"
@@ -449,28 +449,11 @@
       "type": "object",
       "properties": {
         "file": {
-          "type": "file",
+          "type": "string",
           "description": "JSON file",
           "x-meta": {
             "swaggerType": "file"
-          },
-          "in": "formData"
-        }
-      },
-      "required": [
-        "file"
-      ]
-    },
-    "Model 4": {
-      "type": "object",
-      "properties": {
-        "file": {
-          "type": "file",
-          "description": "JSON file",
-          "x-meta": {
-            "swaggerType": "file"
-          },
-          "in": "formData"
+          }
         }
       },
       "required": [
