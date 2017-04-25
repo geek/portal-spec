@@ -446,6 +446,11 @@
     },
     "Model 2": {
       "type": "object",
+      "example": {
+        "id": 42,
+        "name": "User Services",
+        "datacenter": "us-sw-1"
+      },
       "properties": {
         "name": {
           "type": "string",
@@ -457,8 +462,7 @@
         },
         "id": {
           "type": "number",
-          "description": "ID of deployment group",
-          "example": 42
+          "description": "ID of deployment group"
         }
       },
       "required": [
@@ -484,6 +488,33 @@
     },
     "Model 4": {
       "type": "object",
+      "example": {
+        "revision": 5,
+        "file": {
+          "consul": {
+            "image": "autopilotpattern/consul:0.7.2-r0.8",
+            "restart": "always",
+            "dns": [
+              "127.0.0.1"
+            ],
+            "labels": [
+              "triton.cns.services=consul"
+            ],
+            "ports": [
+              "8500:8500"
+            ],
+            "command": ">\n        /usr/local/bin/containerpilot\n        /bin/consul agent -server\n          -config-dir=/etc/consul\n          -log-level=err\n          -bootstrap-expect 1\n          -ui-dir /ui"
+          },
+          "prometheus": {
+            "image": "autopilotpattern/prometheus:1.3.0r1.0",
+            "mem_limit": "128m",
+            "restart": "always",
+            "ports": [
+              "9090:9090"
+            ]
+          }
+        }
+      },
       "properties": {
         "file": {
           "$ref": "#/definitions/file",
@@ -491,7 +522,8 @@
         },
         "revision": {
           "type": "number",
-          "description": "Revision number of manifest"
+          "description": "Revision number of manifest",
+          "example": 5
         }
       },
       "required": [
@@ -500,16 +532,18 @@
     },
     "Model 5": {
       "type": "object",
+      "example": {
+        "name": "us-sw-1",
+        "url": "https://us-sw-1.api.joyentcloud.com"
+      },
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of datacenter",
-          "example": "us-east-1"
+          "description": "Name of datacenter"
         },
         "url": {
           "type": "string",
-          "description": "URL of datacenter",
-          "example": "https://us-east-1.api.joyentcloud.com"
+          "description": "URL of datacenter"
         }
       },
       "required": [
@@ -519,6 +553,16 @@
     },
     "Model 6": {
       "type": "array",
+      "example": [
+        {
+          "name": "us-sw-1",
+          "url": "https://us-sw-1.api.joyentcloud.com"
+        },
+        {
+          "name": "us-west-1",
+          "url": "https://us-west-1.api.joyentcloud.com"
+        }
+      ],
       "items": {
         "$ref": "#/definitions/Model 5",
         "type": "object"
@@ -549,11 +593,14 @@
     },
     "Model 9": {
       "type": "object",
+      "example": {
+        "name": "consul",
+        "count": 3
+      },
       "properties": {
         "name": {
           "type": "string",
-          "description": "Unique name to identify the service",
-          "example": "consul"
+          "description": "Unique name to identify the service"
         },
         "count": {
           "type": "number",
@@ -567,6 +614,16 @@
     },
     "Model 10": {
       "type": "array",
+      "example": [
+        {
+          "name": "consul",
+          "count": 3
+        },
+        {
+          "name": "prometheus",
+          "count": 1
+        }
+      ],
       "items": {
         "$ref": "#/definitions/Model 9",
         "type": "object"
@@ -574,17 +631,22 @@
     },
     "Model 11": {
       "type": "object",
+      "example": {
+        "date": 1493146372179,
+        "type": "start",
+        "meta": {
+          "user": "Tom"
+        }
+      },
       "properties": {
         "date": {
           "type": "string",
           "format": "date",
-          "description": "Date/time when the activity occurred",
-          "example": 1493144175279
+          "description": "Date/time when the activity occurred"
         },
         "type": {
           "type": "string",
-          "description": "The type of activity that occurred",
-          "example": "restart"
+          "description": "The type of activity that occurred"
         },
         "meta": {
           "$ref": "#/definitions/file",
@@ -598,6 +660,22 @@
     },
     "Model 12": {
       "type": "array",
+      "example": [
+        {
+          "date": 1493146372179,
+          "type": "start",
+          "meta": {
+            "user": "Tom"
+          }
+        },
+        {
+          "date": 1493146372179,
+          "type": "stop",
+          "meta": {
+            "user": "Dave"
+          }
+        }
+      ],
       "items": {
         "$ref": "#/definitions/Model 11",
         "type": "object"
@@ -605,11 +683,16 @@
     },
     "Model 13": {
       "type": "object",
+      "example": {
+        "service": "consul",
+        "cpu": 1.2,
+        "memory": 23344523,
+        "network": 5024
+      },
       "properties": {
         "service": {
           "type": "string",
-          "description": "Unique name to identify the service",
-          "example": "consul"
+          "description": "Unique name to identify the service"
         },
         "cpu": {
           "type": "number",
@@ -633,6 +716,20 @@
     },
     "Model 14": {
       "type": "array",
+      "example": [
+        {
+          "service": "consul",
+          "cpu": 1.2,
+          "memory": 23344523,
+          "network": 5024
+        },
+        {
+          "service": "prometheus",
+          "cpu": 24.2,
+          "memory": 514234453,
+          "network": 10024
+        }
+      ],
       "items": {
         "$ref": "#/definitions/Model 13",
         "type": "object"
