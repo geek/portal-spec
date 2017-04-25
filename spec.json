@@ -1,1 +1,685 @@
-{"swagger":"2.0","host":"localhost:8000","basePath":"/","schemes":["http"],"info":{"title":"Portal API Documentation","version":"1.0.0"},"tags":[],"paths":{"/deployment":{"post":{"summary":"Create new deployment group","operationId":"postDeployment","parameters":[{"in":"body","name":"body","schema":{"type":"object","$ref":"#/definitions/Model 1"}}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 2","type":"object"},"description":"Successful"},"201":{"schema":{"$ref":"#/definitions/Model 2","type":"object"},"description":"Deployment group created"}}}},"/deployment/{deploymentId}/manifest":{"post":{"summary":"Create a new manifest revision for a deployment group","operationId":"postDeploymentDeploymentidManifest","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true},{"in":"body","name":"body","schema":{"type":"object","$ref":"#/definitions/Model 3"}}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 4","type":"object"},"description":"Successful"},"201":{"schema":{"$ref":"#/definitions/Model 4","type":"object"},"description":"Manifest revision created"}}}},"/datacenters":{"get":{"summary":"Retrieve a list of available datacenters","operationId":"getDatacenters","tags":["datacenters"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 6","type":"array"},"description":"Successful"}}}},"/deployments":{"get":{"summary":"Retrieve a list of deployment groups","operationId":"getDeployments","tags":["deployments"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 7","type":"array"},"description":"Successful"}}}},"/deployment/{deploymentId}":{"get":{"summary":"Retrieve a deployment group","operationId":"getDeploymentDeploymentid","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 2","type":"object"},"description":"Successful"}}},"put":{"summary":"Update a deployment group","operationId":"putDeploymentDeploymentid","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true},{"in":"body","name":"body","schema":{"type":"object","$ref":"#/definitions/Model 15"}}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 2","type":"object"},"description":"Successful"}}},"delete":{"summary":"Delete a deployment group","operationId":"deleteDeploymentDeploymentid","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true}],"tags":["deployment"],"responses":{"default":{"schema":{"type":"string"},"description":"Successful"}}}},"/deployment/{deploymentId}/state":{"get":{"summary":"Retrieve the current state of the deployment group","operationId":"getDeploymentDeploymentidState","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 8","type":"object"},"description":"Successful"}}},"put":{"summary":"Perform an action on the deployment group state","operationId":"putDeploymentDeploymentidState","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true},{"in":"body","name":"body","schema":{"type":"object","$ref":"#/definitions/Model 16"}}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 8","type":"object"},"description":"Successful"}}}},"/deployment/{deploymentId}/services":{"get":{"summary":"Retrieve the services for a deployment group","operationId":"getDeploymentDeploymentidServices","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 10","type":"array"},"description":"Successful"}}}},"/deployment/{deploymentId}/activities":{"get":{"summary":"Retrieve the recent activities for the deployment group","operationId":"getDeploymentDeploymentidActivities","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 12","type":"array"},"description":"Successful"}}}},"/deployment/{deploymentId}/metrics":{"get":{"summary":"Retrieve metrics for the deployment group","operationId":"getDeploymentDeploymentidMetrics","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 14","type":"array"},"description":"Successful"}}}},"/deployment/{deploymentId}/manifest/{revision}":{"get":{"summary":"Retrieve a manifest revision for a deployment group","operationId":"getDeploymentDeploymentidManifestRevision","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true},{"type":"number","description":"Revision number of manifest","name":"revision","in":"path","required":true}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 4","type":"object"},"description":"Successful"}}}},"/deployment/{deploymentId}/service/{name}":{"put":{"summary":"Perform an action on the named service","operationId":"putDeploymentDeploymentidServiceName","parameters":[{"type":"number","description":"ID of deployment group","name":"deploymentId","in":"path","required":true},{"type":"string","description":"Unique name to identify the service","name":"name","in":"path","required":true},{"in":"body","name":"body","schema":{"type":"object","$ref":"#/definitions/Model 17"}}],"tags":["deployment"],"responses":{"200":{"schema":{"$ref":"#/definitions/Model 9","type":"object"},"description":"Successful"}}}}},"definitions":{"Model 1":{"type":"object","properties":{"name":{"type":"string","description":"Name of deployment group"},"datacenter":{"type":"string","description":"datacenter the deployment group belongs to"}},"required":["name","datacenter"]},"Model 2":{"type":"object","properties":{"name":{"type":"string","description":"Name of deployment group"},"datacenter":{"type":"string","description":"datacenter the deployment group belongs to"},"id":{"type":"number","description":"ID of deployment group","example":42}},"required":["name","datacenter","id"]},"file":{"type":"object"},"Model 3":{"type":"object","properties":{"file":{"$ref":"#/definitions/file","type":"object"}},"required":["file"]},"Model 4":{"type":"object","properties":{"file":{"$ref":"#/definitions/file","type":"object"},"revision":{"type":"number","description":"Revision number of manifest"}},"required":["revision"]},"Model 5":{"type":"object","properties":{"name":{"type":"string","description":"Name of datacenter","example":"us-east-1"},"url":{"type":"string","description":"URL of datacenter","example":"https://us-east-1.api.joyentcloud.com"}},"required":["name","url"]},"Model 6":{"type":"array","items":{"$ref":"#/definitions/Model 5","type":"object"}},"Model 7":{"type":"array","items":{"$ref":"#/definitions/Model 2","type":"object"}},"Model 8":{"type":"object","properties":{"current":{"type":"string","description":"The current state of the deployment group","enum":["started","stopped"]}},"required":["current"]},"Model 9":{"type":"object","properties":{"name":{"type":"string","description":"Unique name to identify the service","example":"consul"},"count":{"type":"number","description":"Number of instances of the service","default":1}},"required":["name"]},"Model 10":{"type":"array","items":{"$ref":"#/definitions/Model 9","type":"object"}},"Model 11":{"type":"object","properties":{"date":{"type":"string","format":"date","description":"Date/time when the activity occurred","example":1493143514155},"type":{"type":"string","description":"The type of activity that occurred","example":"restart"},"meta":{"$ref":"#/definitions/file","type":"object"}},"required":["date","type"]},"Model 12":{"type":"array","items":{"$ref":"#/definitions/Model 11","type":"object"}},"Model 13":{"type":"object","properties":{"service":{"type":"string","description":"Unique name to identify the service","example":"consul"},"cpu":{"type":"number","description":"CPU usage percentage"},"memory":{"type":"number","description":"Total memory usage in bytes"},"network":{"type":"number","description":"Total bytes per second transferred by the NIC"}},"required":["service","cpu","memory","network"]},"Model 14":{"type":"array","items":{"$ref":"#/definitions/Model 13","type":"object"}},"Model 15":{"type":"object","properties":{"name":{"type":"string","description":"Name of deployment group"},"datacenter":{"type":"string","description":"datacenter the deployment group belongs to"}}},"Model 16":{"type":"object","properties":{"action":{"type":"string","description":"Action being performed on the deployment group","enum":["start","stop","restart"]}},"required":["action"]},"Model 17":{"type":"object","properties":{"count":{"type":"number","description":"Number of instances of the service","default":1}},"required":["count"]}}}
+{
+  "swagger": "2.0",
+  "host": "localhost:8000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "info": {
+    "title": "Portal API Documentation",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/deployment": {
+      "post": {
+        "summary": "Create new deployment group",
+        "operationId": "postDeployment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 1"
+            }
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 2",
+              "type": "object"
+            },
+            "description": "Successful"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Model 2",
+              "type": "object"
+            },
+            "description": "Deployment group created"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}/manifest": {
+      "post": {
+        "summary": "Create a new manifest revision for a deployment group",
+        "operationId": "postDeploymentDeploymentidManifest",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 3"
+            }
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 4",
+              "type": "object"
+            },
+            "description": "Successful"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Model 4",
+              "type": "object"
+            },
+            "description": "Manifest revision created"
+          }
+        }
+      }
+    },
+    "/datacenters": {
+      "get": {
+        "summary": "Retrieve a list of available datacenters",
+        "operationId": "getDatacenters",
+        "tags": [
+          "datacenters"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 6",
+              "type": "array"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployments": {
+      "get": {
+        "summary": "Retrieve a list of deployment groups",
+        "operationId": "getDeployments",
+        "tags": [
+          "deployments"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 7",
+              "type": "array"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}": {
+      "get": {
+        "summary": "Retrieve a deployment group",
+        "operationId": "getDeploymentDeploymentid",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 2",
+              "type": "object"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a deployment group",
+        "operationId": "putDeploymentDeploymentid",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 15"
+            }
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 2",
+              "type": "object"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a deployment group",
+        "operationId": "deleteDeploymentDeploymentid",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}/state": {
+      "get": {
+        "summary": "Retrieve the current state of the deployment group",
+        "operationId": "getDeploymentDeploymentidState",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 8",
+              "type": "object"
+            },
+            "description": "Successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "Perform an action on the deployment group state",
+        "operationId": "putDeploymentDeploymentidState",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 16"
+            }
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 8",
+              "type": "object"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}/services": {
+      "get": {
+        "summary": "Retrieve the services for a deployment group",
+        "operationId": "getDeploymentDeploymentidServices",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 10",
+              "type": "array"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}/activities": {
+      "get": {
+        "summary": "Retrieve the recent activities for the deployment group",
+        "operationId": "getDeploymentDeploymentidActivities",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 12",
+              "type": "array"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}/metrics": {
+      "get": {
+        "summary": "Retrieve metrics for the deployment group",
+        "operationId": "getDeploymentDeploymentidMetrics",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 14",
+              "type": "array"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}/manifest/{revision}": {
+      "get": {
+        "summary": "Retrieve a manifest revision for a deployment group",
+        "operationId": "getDeploymentDeploymentidManifestRevision",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "number",
+            "description": "Revision number of manifest",
+            "name": "revision",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 4",
+              "type": "object"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/deployment/{deploymentId}/service/{name}": {
+      "put": {
+        "summary": "Perform an action on the named service",
+        "operationId": "putDeploymentDeploymentidServiceName",
+        "parameters": [
+          {
+            "type": "number",
+            "description": "ID of deployment group",
+            "name": "deploymentId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "Unique name to identify the service",
+            "name": "name",
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Model 17"
+            }
+          }
+        ],
+        "tags": [
+          "deployment"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model 9",
+              "type": "object"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Model 1": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of deployment group"
+        },
+        "datacenter": {
+          "type": "string",
+          "description": "Datacenter the deployment group belongs to"
+        }
+      },
+      "required": [
+        "name",
+        "datacenter"
+      ]
+    },
+    "Model 2": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of deployment group"
+        },
+        "datacenter": {
+          "type": "string",
+          "description": "Datacenter the deployment group belongs to"
+        },
+        "id": {
+          "type": "number",
+          "description": "ID of deployment group",
+          "example": 42
+        }
+      },
+      "required": [
+        "name",
+        "datacenter",
+        "id"
+      ]
+    },
+    "file": {
+      "type": "object"
+    },
+    "Model 3": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/file",
+          "type": "object"
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "Model 4": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/file",
+          "type": "object"
+        },
+        "revision": {
+          "type": "number",
+          "description": "Revision number of manifest"
+        }
+      },
+      "required": [
+        "revision"
+      ]
+    },
+    "Model 5": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of datacenter",
+          "example": "us-east-1"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of datacenter",
+          "example": "https://us-east-1.api.joyentcloud.com"
+        }
+      },
+      "required": [
+        "name",
+        "url"
+      ]
+    },
+    "Model 6": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 5",
+        "type": "object"
+      }
+    },
+    "Model 7": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 2",
+        "type": "object"
+      }
+    },
+    "Model 8": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "string",
+          "description": "The current state of the deployment group",
+          "enum": [
+            "started",
+            "stopped"
+          ]
+        }
+      },
+      "required": [
+        "current"
+      ]
+    },
+    "Model 9": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name to identify the service",
+          "example": "consul"
+        },
+        "count": {
+          "type": "number",
+          "description": "Number of instances of the service",
+          "default": 1
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Model 10": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 9",
+        "type": "object"
+      }
+    },
+    "Model 11": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date/time when the activity occurred",
+          "example": 1493144175279
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of activity that occurred",
+          "example": "restart"
+        },
+        "meta": {
+          "$ref": "#/definitions/file",
+          "type": "object"
+        }
+      },
+      "required": [
+        "date",
+        "type"
+      ]
+    },
+    "Model 12": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 11",
+        "type": "object"
+      }
+    },
+    "Model 13": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "Unique name to identify the service",
+          "example": "consul"
+        },
+        "cpu": {
+          "type": "number",
+          "description": "CPU usage percentage"
+        },
+        "memory": {
+          "type": "number",
+          "description": "Total memory usage in bytes"
+        },
+        "network": {
+          "type": "number",
+          "description": "Total bytes per second transferred by the NIC"
+        }
+      },
+      "required": [
+        "service",
+        "cpu",
+        "memory",
+        "network"
+      ]
+    },
+    "Model 14": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Model 13",
+        "type": "object"
+      }
+    },
+    "Model 15": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of deployment group"
+        },
+        "datacenter": {
+          "type": "string",
+          "description": "Datacenter the deployment group belongs to"
+        }
+      }
+    },
+    "Model 16": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Action being performed on the deployment group",
+          "enum": [
+            "start",
+            "stop",
+            "restart"
+          ]
+        }
+      },
+      "required": [
+        "action"
+      ]
+    },
+    "Model 17": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "Number of instances of the service",
+          "default": 1
+        }
+      },
+      "required": [
+        "count"
+      ]
+    }
+  }
+}
