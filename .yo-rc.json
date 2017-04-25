@@ -1,0 +1,11 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": true,
+    "importedSpec": "./spec.json",
+    "name": "ContainerPilot Portal",
+    "repo": "geek/portal-spec",
+    "splitSpec": false,
+    "samples": true,
+    "installSwaggerUI": true
+  }
+}
